@@ -1,22 +1,39 @@
 const express = require('express');
 const cors = require('cors');
-const axios = require('axios');
+const routes = require('./routes');
+const sequelize = require('./config/database');
+const config = require('./config/config');
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = '';
+app.use('/', routes);
 
-app.get('/search', async (req, res) => {
-  const { query } = req.query;
+
+const startServer = async () => {
   try {
-    const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`);
-    res.json(response.data.results);
-  } catch (error) {
-    res.status(500).send("Erro ao buscar filmes");
-  }
-});
+    await sequelize.authenticate();
+    if (config.NODE_ENV === 'development') {
+      console.log('Connection has been established successfully.');
+    }
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    await sequelize.sync({ alter: false });
+    if (config.NODE_ENV === 'development') {
+      console.log('All models were synchronized successfully.');
+    }
+
+    app.listen(config.PORT, () => {
+      if (config.NODE_ENV === 'development') {
+        console.log(`Server is running on http://localhost:${config.PORT}`);
+      }
+    });
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+};
+
+startServer();
+
+module.exports = app;

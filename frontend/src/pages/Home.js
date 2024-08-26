@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from '../components/SearchBar';
 import MovieList from '../components/MovieList';
 import { searchMovies, getFavorites, addFavorite, removeFavorite } from '../services/api';
+import '../styles/Notification.css';
 
 const Home = () => {
     const [movies, setMovies] = useState([]);
     const [favorites, setFavorites] = useState([]);
+    const [notification, setNotification] = useState('');
 
     useEffect(() => {
         const fetchFavorites = async () => {
@@ -27,7 +29,13 @@ const Home = () => {
     const handleAddFavorite = async (movie) => {
         const favorite = await addFavorite(movie);
         setFavorites([...favorites, favorite]);
+
         setMovies(movies.filter(m => m.id !== movie.id));
+
+        setNotification(`${movie.title} has been added to favorites!`);
+        setTimeout(() => {
+            setNotification('');
+        }, 3000);
     };
 
     const handleRemoveFavorite = async (id) => {
@@ -42,6 +50,7 @@ const Home = () => {
     return (
         <div>
             <SearchBar onSearch={handleSearch} />
+            {notification && <div className="notification">{notification}</div>}
             <MovieList
                 movies={movies}
                 onAddFavorite={handleAddFavorite}

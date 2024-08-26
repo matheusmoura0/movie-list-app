@@ -1,15 +1,27 @@
+import axios from 'axios';
+
 const BASE_URL = 'http://localhost:5000';
 
 export const searchMovies = async (query) => {
-    const response = await fetch(`${BASE_URL}/movies/search?query=${query}`);
-    const data = await response.json();
-    return data;
+    try {
+        const response = await axios.get(`${BASE_URL}/movies/search`, {
+            params: { query },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error searching movies:', error);
+        throw error;
+    }
 };
 
 export const getFavorites = async () => {
-    const response = await fetch(`${BASE_URL}/favorites`);
-    const data = await response.json();
-    return Array.isArray(data) ? data : [];
+    try {
+        const response = await axios.get(`${BASE_URL}/favorites`);
+        return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+        console.error('Error fetching favorites:', error);
+        throw error;
+    }
 };
 
 export const addFavorite = async (movie) => {
@@ -24,65 +36,61 @@ export const addFavorite = async (movie) => {
             user_id: null,
         };
 
-        console.log('requestBody:', requestBody)
+        const response = await axios.post(`${BASE_URL}/favorites`, requestBody);
 
-        const response = await fetch(`${BASE_URL}/favorites`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody),
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to add favorite');
-        }
-
-        const data = await response.json();
-        return data;
+        return response.data;
     } catch (error) {
         console.error('Error adding favorite:', error);
         throw error;
     }
 };
 
-
-
 export const removeFavorite = async (id) => {
     try {
-        const response = await fetch(`${BASE_URL}/favorites/${id}`, {
-            method: 'DELETE',
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to remove favorite');
-        }
+        await axios.delete(`${BASE_URL}/favorites/${id}`);
     } catch (error) {
         console.error('Error removing favorite:', error);
         throw error;
     }
 };
 
-export const createSharedLink = async (favoritesIds) => {
-    const response = await fetch(`${BASE_URL}/shared`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ favorites_ids: favoritesIds }),
-    });
-    const data = await response.json();
-    return data;
+export const createSharedLink = async (favoriteIds) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/shared`, { favoriteIds });
+        console.log('Response from backend:', response.data); // Log to check the response
+        return response.data;
+    } catch (error) {
+        console.error('Error creating shared link:', error);
+        throw error;
+    }
+};
+
+export const getFavoritesBySharedLink = async (uuid) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/shared/${uuid}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching favorites by shared link:', error);
+        throw error;
+    }
 };
 
 export const getSharedFavorites = async (id) => {
-    const response = await fetch(`${BASE_URL}/shared/${id}`);
-    const data = await response.json();
-    return data;
+    try {
+        const response = await axios.get(`${BASE_URL}/shared/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching shared favorites:', error);
+        throw error;
+    }
 };
 
 export const getMovie = async (id) => {
-    const response = await fetch(`${BASE_URL}/movies/${id}`);
-    const data = await response.json();
-    return data;
+    try {
+        const response = await axios.get(`${BASE_URL}/movies/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching movie:', error);
+        throw error;
+    }
 };

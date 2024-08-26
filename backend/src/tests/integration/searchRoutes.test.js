@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../../app');
 const axios = require('axios');
-const config = require('../../config/config');
+//const config = require('../../config/config');
 
 jest.mock('axios');
 

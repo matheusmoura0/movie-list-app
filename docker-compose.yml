@@ -1,1 +1,35 @@
-version: '3'services:  frontend:    build: ./frontend    ports:      - "3000:80"    volumes:      - ./frontend:/app      - /app/node_modules  backend:    build: ./backend    ports:      - "5000:5000"    volumes:      - ./backend:/app      - /app/node_modules    environment:      - API_KEY=
+version: '3'
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:80"
+    restart: always
+    healthcheck:
+      test: [ "CMD", "lsof", "-t", "-i:3000" ]
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+        - NODE_ENV=development
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  backend:
+    build: ./backend
+    ports:
+        - "5000:5000"
+    volumes:
+        - ./backend:/app
+        - /app/node_modules
+    environment:
+        - NODE_ENV=development
+    restart: always
+    healthcheck:
+      test: [ "CMD", "lsof", "-t", "-i:5000" ]
+      timeout: 10s
+      retries: 5

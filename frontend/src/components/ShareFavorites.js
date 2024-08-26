@@ -6,11 +6,11 @@ const ShareFavorites = ({ favoriteIds }) => {
 
     const handleGenerateLink = async () => {
         try {
-            const { uuid } = await createSharedLink(favoriteIds);
-            if (uuid) {
-                setShareLink(`${window.location.origin}/shared/${uuid}`);
+            const sharedLink = await createSharedLink(favoriteIds);
+            if (sharedLink) {
+                setShareLink(`${window.location.origin}${sharedLink}`);
             } else {
-                console.error('UUID is undefined');
+                console.error('Shared link is undefined');
             }
         } catch (error) {
             console.error('Failed to generate share link', error);

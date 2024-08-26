@@ -57,8 +57,8 @@ export const removeFavorite = async (id) => {
 export const createSharedLink = async (favoriteIds) => {
     try {
         const response = await axios.post(`${BASE_URL}/shared`, { favoriteIds });
-        console.log('Response from backend:', response.data); // Log to check the response
-        return response.data;
+        const { sharedLink } = response.data
+        return sharedLink;
     } catch (error) {
         console.error('Error creating shared link:', error);
         throw error;

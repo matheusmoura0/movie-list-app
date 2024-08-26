@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../app');
-const SequelizeMock = require("sequelize-mock");
+//const SequelizeMock = require("sequelize-mock");
 
 jest.mock('../../models/Favorite', () => {
     const SequelizeMock = require('sequelize-mock');

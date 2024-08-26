@@ -19,8 +19,12 @@ export const addFavorite = async (movie) => {
             title: movie.title,
             vote_average: movie.vote_average,
             poster_path: movie.poster_path,
+            release_date: movie.release_date,
+            overview: movie.overview,
             user_id: null,
         };
+
+        console.log('requestBody:', requestBody)
 
         const response = await fetch(`${BASE_URL}/favorites`, {
             method: 'POST',

@@ -22,6 +22,16 @@ const Favorite = sequelize.define('Favorite', {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
+    release_date: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    overview: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+
+    underscored: true,
 });
 
 module.exports = Favorite;

@@ -22,8 +22,6 @@ export const addFavorite = async (movie) => {
             user_id: null,
         };
 
-        console.log('Sending data:', requestBody);  // Adicionar este log
-
         const response = await fetch(`${BASE_URL}/favorites`, {
             method: 'POST',
             headers: {

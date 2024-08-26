@@ -19,18 +19,13 @@ const Favorites = () => {
         setFavorites(favorites.filter(fav => fav.id !== id));
     };
 
-    const isFavorite = (movie) => {
-        return favorites.some(fav => fav.movie_id === movie.id);
-    };
-
     return (
         <div>
             <h2>My Favorite Movies</h2>
             <MovieList
                 movies={favorites}
-                favorites={favorites}
                 onRemoveFavorite={handleRemoveFavorite}
-                isFavorite={isFavorite}
+                isFavoritePage={true}
             />
         </div>
     );

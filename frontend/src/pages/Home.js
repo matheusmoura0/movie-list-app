@@ -39,10 +39,10 @@ const Home = () => {
             <SearchBar onSearch={handleSearch} />
             <MovieList
                 movies={movies}
-                favorites={favorites}
                 onAddFavorite={handleAddFavorite}
                 onRemoveFavorite={handleRemoveFavorite}
                 isFavorite={isFavorite}
+                isFavoritePage={false}
             />
         </div>
     );

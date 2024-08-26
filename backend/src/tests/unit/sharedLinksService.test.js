@@ -2,8 +2,30 @@ const sharedLinksService = require('../../services/sharedLinksService');
 const SharedLink = require('../../models/SharedLink');
 const Favorite = require('../../models/Favorite');
 
-jest.mock('../../models/SharedLink');
-jest.mock('../../models/Favorite');
+jest.mock('../../models/Favorite', () => {
+    const SequelizeMock = require('sequelize-mock');
+    const dbMock = new SequelizeMock();
+    const FavoriteMock = dbMock.define('Favorite', {
+        id: 1,
+        movie_id: 1,
+        title: 'Test Movie',
+        vote_average: 8.5,
+    });
+    FavoriteMock.findAll = jest.fn();
+    FavoriteMock.findOne = jest.fn();
+    return FavoriteMock;
+});
+
+jest.mock('../../models/SharedLink', () => {
+    const SequelizeMock = require('sequelize-mock');
+    const dbMock = new SequelizeMock();
+    const SharedLinkMock = dbMock.define('SharedLink', {
+        uuid: 'test-uuid',
+    });
+    SharedLinkMock.findOne = jest.fn();
+    SharedLinkMock.create = jest.fn();
+    return SharedLinkMock;
+});
 
 describe('sharedLinksService', () => {
     it('should create a shared link', async () => {

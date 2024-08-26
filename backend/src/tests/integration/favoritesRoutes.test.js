@@ -1,8 +1,20 @@
 const request = require('supertest');
 const app = require('../../app');
-const Favorite = require('../../models/Favorite');
+const SequelizeMock = require("sequelize-mock");
 
-jest.mock('../../models/Favorite');
+jest.mock('../../models/Favorite', () => {
+    const SequelizeMock = require('sequelize-mock');
+    const dbMock = new SequelizeMock();
+    const FavoriteMock = dbMock.define('Favorite', {
+        id: 1,
+        movie_id: 1,
+        title: 'Test Movie',
+        vote_average: 8.5,
+    });
+    FavoriteMock.findAll = jest.fn();
+    FavoriteMock.findOne = jest.fn();
+    return FavoriteMock;
+});
 
 describe('Favorites API', () => {
     it('should add a new favorite', async () => {

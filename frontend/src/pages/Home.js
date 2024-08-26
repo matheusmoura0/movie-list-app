@@ -17,17 +17,22 @@ const Home = () => {
 
     const handleSearch = async (query) => {
         const results = await searchMovies(query);
-        setMovies(results);
+        const filteredResults = results.filter(movie =>
+            !favorites.some(fav => fav.movie_id === movie.id)
+        );
+
+        setMovies(filteredResults);
     };
 
     const handleAddFavorite = async (movie) => {
         const favorite = await addFavorite(movie);
         setFavorites([...favorites, favorite]);
+        setMovies(movies.filter(m => m.id !== movie.id));
     };
 
     const handleRemoveFavorite = async (id) => {
         await removeFavorite(id);
-        setFavorites(favorites.filter(fav => fav.id !== id));
+        setFavorites(favorites.filter(fav => fav.movie_id !== id));
     };
 
     const isFavorite = (movie) => {

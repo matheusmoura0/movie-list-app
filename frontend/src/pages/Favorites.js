@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import MovieList from '../components/MovieList';
+import ShareFavorites from '../components/ShareFavorites';
 import { getFavorites, removeFavorite } from '../services/api';
 import '../styles/Favorites.css';
 
@@ -19,14 +20,20 @@ const Favorites = () => {
         setFavorites(favorites.filter(fav => fav.id !== id));
     };
 
+    const isFavorite = (movie) => {
+        return favorites.some(fav => fav.movie_id === movie.id);
+    };
+
     return (
         <div>
             <h2>My Favorite Movies</h2>
             <MovieList
                 movies={favorites}
+                favorites={favorites}
                 onRemoveFavorite={handleRemoveFavorite}
-                isFavoritePage={true}
+                isFavorite={isFavorite}
             />
+            <ShareFavorites favoriteIds={favorites.map(fav => fav.id)} />
         </div>
     );
 };

@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
-import './App.css';  // Certifique-se de importar o CSS
+import './App.css';
+import SharedFavorites from './pages/SharedFavorites';
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/favorites" element={<Favorites />} />
+                <Route path="/shared/:uuid" element={<SharedFavorites />} />
             </Routes>
         </Router>
     );

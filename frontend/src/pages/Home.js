@@ -34,6 +34,13 @@ const Home = () => {
 
         setNotification(`${movie.title} has been added to favorites!`);
         setTimeout(() => {
+            const notificationElement = document.querySelector('.notification');
+            if (notificationElement) {
+                notificationElement.classList.add('fade-out');
+            }
+        }, 2500);
+
+        setTimeout(() => {
             setNotification('');
         }, 3000);
     };

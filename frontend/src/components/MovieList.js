@@ -3,7 +3,7 @@ import MovieCard from './MovieCard';
 import '../styles/MovieList.css';
 
 
-const MovieList = ({ movies, onAddFavorite, onRemoveFavorite, isFavorite }) => {
+const MovieList = ({ movies, onAddFavorite, onRemoveFavorite, isFavorite, isShared }) => {
     return (
         <div className="movie-list">
             {movies.map(movie => (
@@ -13,6 +13,7 @@ const MovieList = ({ movies, onAddFavorite, onRemoveFavorite, isFavorite }) => {
                     onAddFavorite={onAddFavorite}
                     onRemoveFavorite={onRemoveFavorite}
                     isFavorite={isFavorite}
+                    isShared={isShared}
                 />
             ))}
         </div>

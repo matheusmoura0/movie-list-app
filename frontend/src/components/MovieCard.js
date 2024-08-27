@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/MovieCard.css';
 
-const MovieCard = ({ movie, onAddFavorite, onRemoveFavorite, isFavorite }) => {
+const MovieCard = ({ movie, onAddFavorite, onRemoveFavorite, isFavorite, isShared }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleToggleExpand = () => {
@@ -18,20 +18,22 @@ const MovieCard = ({ movie, onAddFavorite, onRemoveFavorite, isFavorite }) => {
                     alt={movie.title}
                     className="movie-poster"
                 />
-                {isFavorite && isFavorite(movie) ? (
-                    <button
-                        className="favorite-button is-favorite"
-                        onClick={() => onRemoveFavorite(movie.id)}
-                    >
-                        ✖
-                    </button>
-                ) : (
-                    <button
-                        className="favorite-button"
-                        onClick={() => onAddFavorite(movie)}
-                    >
-                        ★
-                    </button>
+                {!isShared && (
+                    isFavorite && isFavorite(movie) ? (
+                        <button
+                            className="favorite-button is-favorite"
+                            onClick={() => onRemoveFavorite(movie.id)}
+                        >
+                            ✖
+                        </button>
+                    ) : (
+                        <button
+                            className="favorite-button"
+                            onClick={() => onAddFavorite(movie)}
+                        >
+                            ★
+                        </button>
+                    )
                 )}
             </div>
             <div className="movie-details">

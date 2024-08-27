@@ -1,39 +1,28 @@
 const express = require('express');
 const cors = require('cors');
 const routes = require('./routes');
-const sequelize = require('./config/database');
-const config = require('./config/config');
+const { initialize } = require('./initialize');
+
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
 app.use('/', routes);
 
-
 const startServer = async () => {
-  try {
-    await sequelize.authenticate();
-    if (config.NODE_ENV === 'development') {
-      console.log('Connection has been established successfully.');
-    }
+    await initialize();
 
-    await sequelize.sync({ alter: false });
-    if (config.NODE_ENV === 'development') {
-      console.log('All models were synchronized successfully.');
-    }
-
-    app.listen(config.PORT, () => {
-      if (config.NODE_ENV === 'development') {
-        console.log(`Server is running on http://localhost:${config.PORT}`);
-      }
+    const PORT = process.env.PORT || 3000;
+    const HOST = process.env.HOST || 'localhost';
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://${HOST}:${PORT}`);
     });
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
 };
 
+
 startServer();
+
+
 
 module.exports = app;

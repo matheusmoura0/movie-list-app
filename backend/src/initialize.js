@@ -10,7 +10,8 @@ async function initialize() {
 
     await Favorite.sync();
     await SharedLink.sync();
-    await sequelize.sync();
+    await sequelize.sync({ force: true });
+
 }
 
 module.exports = {

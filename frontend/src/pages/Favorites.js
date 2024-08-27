@@ -23,7 +23,9 @@ const Favorites = () => {
 
     return (
         <div>
-            <h2>My Favorite Movies</h2>
+            <h2
+            className={'favorites-title'}
+            >My Favorite Movies</h2>
             <MovieList
                 movies={favorites}
                 favorites={favorites}

@@ -1,6 +1,6 @@
 .share-container {
     position: fixed;
-    top: 20px;
+    top: 1px;
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
@@ -63,4 +63,11 @@
 
 .copy-button.copied {
     background-color: #17a2b8;
+}
+
+.shared-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
 }

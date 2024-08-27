@@ -33,8 +33,10 @@ const SharedFavorites = () => {
 
     return (
         <div>
-            <h2>Shared Favorite Movies</h2>
-            <MovieList movies={sharedFavorites} isFavorite={() => true}
+            <h2
+            className="shared-title"
+            >Shared Favorite Movies</h2>
+            <MovieList movies={sharedFavorites} isFavorite={() => true} isShared={true}
             />
         </div>
     );

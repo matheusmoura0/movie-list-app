@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { createSharedLink } from '../services/api';
+import '../styles/ShareFavorites.css';
 
 const ShareFavorites = ({ favoriteIds }) => {
     const [shareLink, setShareLink] = useState('');
+    const [copied, setCopied] = useState(false);
 
     const handleGenerateLink = async () => {
         try {
             const sharedLink = await createSharedLink(favoriteIds);
             if (sharedLink) {
                 setShareLink(`${window.location.origin}${sharedLink}`);
+                setCopied(false); // Reset the copied state if a new link is generated
             } else {
                 console.error('Shared link is undefined');
             }
@@ -17,15 +20,27 @@ const ShareFavorites = ({ favoriteIds }) => {
         }
     };
 
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(shareLink);
+        setCopied(true);
+    };
+
     return (
-        <div>
-            <button onClick={handleGenerateLink}>Generate Share Link</button>
+        <div className="share-container">
+            <button className="generate-link-button" onClick={handleGenerateLink}>
+                Generate Share Link
+            </button>
             {shareLink && (
-                <div>
-                    <p>Share this link:</p>
-                    <a href={shareLink} target="_blank" rel="noopener noreferrer">
-                        {shareLink}
-                    </a>
+                <div className="share-link-container">
+                    <input
+                        type="text"
+                        value={shareLink}
+                        readOnly
+                        className="share-link-input"
+                    />
+                    <button className="copy-button" onClick={handleCopyLink}>
+                        {copied ? 'Copied!' : 'Copy Link'}
+                    </button>
                 </div>
             )}
         </div>

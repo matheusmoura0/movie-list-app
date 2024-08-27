@@ -2,7 +2,8 @@ import React from 'react';
 import MovieCard from './MovieCard';
 import '../styles/MovieList.css';
 
-const MovieList = ({ movies, onAddFavorite, onRemoveFavorite, isFavoritePage, isFavorite }) => {
+
+const MovieList = ({ movies, onAddFavorite, onRemoveFavorite, isFavorite }) => {
     return (
         <div className="movie-list">
             {movies.map(movie => (
@@ -11,8 +12,7 @@ const MovieList = ({ movies, onAddFavorite, onRemoveFavorite, isFavoritePage, is
                     movie={movie}
                     onAddFavorite={onAddFavorite}
                     onRemoveFavorite={onRemoveFavorite}
-                    isFavorite={isFavoritePage ? true : isFavorite(movie)}
-                    isFavoritePage={isFavoritePage}
+                    isFavorite={isFavorite}
                 />
             ))}
         </div>

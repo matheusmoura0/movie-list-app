@@ -18,7 +18,7 @@ const MovieCard = ({ movie, onAddFavorite, onRemoveFavorite, isFavorite, isFavor
                     alt={movie.title}
                     className="movie-poster"
                 />
-                {isFavoritePage ? (
+                {isFavorite && isFavorite(movie) ? (
                     <button
                         className="favorite-button is-favorite"
                         onClick={() => onRemoveFavorite(movie.id)}
@@ -27,10 +27,10 @@ const MovieCard = ({ movie, onAddFavorite, onRemoveFavorite, isFavorite, isFavor
                     </button>
                 ) : (
                     <button
-                        className={`favorite-button ${isFavorite ? 'is-favorite' : ''}`}
-                        onClick={() => isFavorite ? onRemoveFavorite(movie.id) : onAddFavorite(movie)}
+                        className="favorite-button"
+                        onClick={() => onAddFavorite(movie)}
                     >
-                        {isFavorite ? '✖' : '★'}
+                        ★
                     </button>
                 )}
             </div>

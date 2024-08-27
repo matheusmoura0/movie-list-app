@@ -1,28 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { getFavoritesBySharedLink } from '../services/api';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { getSharedFavorites } from '../services/api';
 import MovieList from '../components/MovieList';
 
 const SharedFavorites = () => {
     const { uuid } = useParams();
-    const [favorites, setFavorites] = useState([]);
+    const [sharedFavorites, setSharedFavorites] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchFavorites = async () => {
+        const fetchSharedFavorites = async () => {
             try {
-                const favs = await getFavoritesBySharedLink(uuid);
-                setFavorites(favs);
+                const favorites = await getSharedFavorites(uuid);
+                setSharedFavorites(favorites);
             } catch (error) {
-                console.error('Failed to fetch shared favorites', error);
+                console.error('Error fetching shared favorites:', error);
+            } finally {
+                setLoading(false);
             }
         };
-        fetchFavorites();
+
+        fetchSharedFavorites();
     }, [uuid]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!sharedFavorites.length) {
+        return <div>No favorites found in this list.</div>;
+    }
 
     return (
         <div>
             <h2>Shared Favorite Movies</h2>
-            <MovieList movies={favorites} />
+            <MovieList movies={sharedFavorites} isFavorite={() => true}
+            />
         </div>
     );
 };

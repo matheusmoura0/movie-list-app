@@ -20,9 +20,6 @@ const Favorites = () => {
         setFavorites(favorites.filter(fav => fav.id !== id));
     };
 
-    const isFavorite = (movie) => {
-        return favorites.some(fav => fav.movie_id === movie.id);
-    };
 
     return (
         <div>
@@ -31,9 +28,9 @@ const Favorites = () => {
                 movies={favorites}
                 favorites={favorites}
                 onRemoveFavorite={handleRemoveFavorite}
-                isFavorite={isFavorite}
+                isFavorite={() => true}
             />
-            <ShareFavorites favoriteIds={favorites.map(fav => fav.id)} />
+            <ShareFavorites favoriteIds={favorites.map(fav => fav.id)} />  {/* Add this line */}
         </div>
     );
 };

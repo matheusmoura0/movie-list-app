@@ -1,4 +1,4 @@
-const Favorite = require('../models/Favorite');
+const { Favorite } = require('../models');
 
 const addFavorite = async (favoriteData) => {
     return await Favorite.create(favoriteData);

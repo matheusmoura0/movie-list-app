@@ -12,7 +12,7 @@ const createSharedLink = async (req, res) => {
         res.status(201).json({ sharedLink: `/shared/${uuid}` });
     } catch (error) {
         console.error('Error creating shared link:', error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
 

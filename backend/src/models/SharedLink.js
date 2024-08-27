@@ -1,19 +1,17 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-const Favorite = require('./Favorite');
+module.exports = (sequelize, DataTypes) => {
+    const SharedLink = sequelize.define('SharedLink', {
+        uuid: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true,
+        },
+    }, {
+        tableName: 'SharedLinks',
+    });
 
-const SharedLink = sequelize.define('SharedLink', {
-    uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
-    },
-}, {
-    timestamps: true,
-});
+    SharedLink.associate = (models) => {
+        SharedLink.belongsToMany(models.Favorite, { through: 'SharedLinkFavorites' });
+    };
 
-
-SharedLink.belongsToMany(Favorite, { through: 'SharedLinkFavorites' });
-Favorite.belongsToMany(SharedLink, { through: 'SharedLinkFavorites' });
-
-module.exports = SharedLink;
+    return SharedLink;
+};

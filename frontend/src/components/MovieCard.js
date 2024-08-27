@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/MovieCard.css';
 
-const MovieCard = ({ movie, onAddFavorite, onRemoveFavorite, isFavorite, isFavoritePage }) => {
+const MovieCard = ({ movie, onAddFavorite, onRemoveFavorite, isFavorite }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleToggleExpand = () => {

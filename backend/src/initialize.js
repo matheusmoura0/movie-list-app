@@ -7,6 +7,7 @@ const SharedLink = require('./models/SharedLink')(db.sequelize, Sequelize.DataTy
 
 async function initialize() {
     const sequelize = new Sequelize(config.database, config.username, config.password, config);
+    dialectModule: require('pg')
 
     await Favorite.sync();
     await SharedLink.sync();

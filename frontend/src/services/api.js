@@ -60,7 +60,7 @@ export const createSharedLink = async (favoriteIds) => {
         const { sharedLink } = response.data
         return sharedLink;
     } catch (error) {
-        console.error('Error creating shared link:', error);
+        console.error('Error creating shared link!:', error);
         throw error;
     }
 };

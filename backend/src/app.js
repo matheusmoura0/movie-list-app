@@ -12,15 +12,10 @@ app.use(express.json());
 
 app.use('/', routes);
 
-app.get('/*' , (req, res) => {
-  res.sendfile(
-     path.join(__dirname, "../../frontend/build/index.html"),
-     function (err) {
-       if (err) {
-         res.status(500).send(err);
-        }
-     }
-  );
+app.use(express.static(path.join(__dirname, '../../frontend/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/build', 'index.html'));
 });
 
 

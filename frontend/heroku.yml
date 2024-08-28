@@ -3,4 +3,4 @@ build:
     web: Dockerfile
 
 run:
-  web: serve -s build  # Supondo que você esteja u
+  web: nginx -g 'daemon off;'

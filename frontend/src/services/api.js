@@ -4,7 +4,7 @@ const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 export const searchMovies = async (query) => {
     try {
-        const response = await axios.get(`${BASE_URL}/api/movies/search`, {
+        const response = await axios.get(`${BASE_URL}/movies/search`, {
             params: { query },
         });
         return response.data;

@@ -7,6 +7,6 @@ const searchRoutes = require('./searchRoutes');
 
 router.use('/api/favorites', favoritesRoutes);
 router.use('/api/shared', sharedLinksRoutes);
-router.use('/api/movies/search', searchRoutes);
+router.use('/movies/search', searchRoutes);
 
 module.exports = router;

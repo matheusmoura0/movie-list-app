@@ -30,8 +30,9 @@ const Favorite = sequelize.define('Favorite', {
         type: DataTypes.TEXT,
         allowNull: false,
     },
-
-    underscored: true,
+}, {
+    timestamps: true,
+    
 });
 
 module.exports = Favorite;

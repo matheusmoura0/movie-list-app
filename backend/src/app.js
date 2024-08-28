@@ -19,7 +19,7 @@ const startServer = async () => {
       console.log('Connection has been established successfully.');
     }
 
-    await sequelize.sync({ alter: false });
+    await sequelize.sync({ force: true });
     if (config.NODE_ENV === 'development') {
       console.log('All models were synchronized successfully.');
     }

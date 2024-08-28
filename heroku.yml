@@ -1,0 +1,12 @@
+setup:
+  addons:
+    - plan: heroku-postgresql  # Adiciona um banco de dados PostgreSQL, se necessário
+
+build:
+  docker:
+    web: Dockerfile # Use o Dockerfile para construção
+  config:
+    dockerfile: ./Dockerfile
+
+run:
+  web: docker-compose up

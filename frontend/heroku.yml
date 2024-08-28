@@ -1,6 +1,10 @@
+setup:
+  addons:
+    - plan: heroku-postgresql:hobby-dev
+
 build:
   docker:
-    web: Dockerfile
+    web: frontend/Dockerfile
 
 run:
   web: nginx -g 'daemon off;'

@@ -2,6 +2,6 @@ const express = require('express');
 const router = express.Router();
 const searchController = require('../controllers/searchController');
 
-router.get('/', searchController.searchMovies);
+router.get('/api', searchController.searchMovies);
 
 module.exports = router;

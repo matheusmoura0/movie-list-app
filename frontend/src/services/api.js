@@ -4,7 +4,7 @@ const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 export const searchMovies = async (query) => {
     try {
-        const response = await axios.get(`${BASE_URL}/movies/search`, {
+        const response = await axios.get(`${BASE_URL}/api/movies/search`, {
             params: { query },
         });
         return response.data;
@@ -16,7 +16,7 @@ export const searchMovies = async (query) => {
 
 export const getFavorites = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}/favorites`);
+        const response = await axios.get(`${BASE_URL}/api/favorites`);
         return Array.isArray(response.data) ? response.data : [];
     } catch (error) {
         console.error('Error fetching favorites:', error);
@@ -36,7 +36,7 @@ export const addFavorite = async (movie) => {
             user_id: null,
         };
 
-        const response = await axios.post(`${BASE_URL}/favorites`, requestBody);
+        const response = await axios.post(`${BASE_URL}/api/favorites`, requestBody);
 
         return response.data;
     } catch (error) {
@@ -47,7 +47,7 @@ export const addFavorite = async (movie) => {
 
 export const removeFavorite = async (id) => {
     try {
-        await axios.delete(`${BASE_URL}/favorites/${id}`);
+        await axios.delete(`${BASE_URL}/api/favorites/${id}`);
     } catch (error) {
         console.error('Error removing favorite:', error);
         throw error;
@@ -56,7 +56,7 @@ export const removeFavorite = async (id) => {
 
 export const createSharedLink = async (favoriteIds) => {
     try {
-        const response = await axios.post(`${BASE_URL}/shared`, { favoriteIds });
+        const response = await axios.post(`${BASE_URL}/api/shared`, { favoriteIds });
         const { sharedLink } = response.data
         return sharedLink;
     } catch (error) {
@@ -67,7 +67,7 @@ export const createSharedLink = async (favoriteIds) => {
 
 export const getFavoritesBySharedLink = async (uuid) => {
     try {
-        const response = await axios.get(`${BASE_URL}/shared/${uuid}`);
+        const response = await axios.get(`${BASE_URL}/api/shared/${uuid}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching favorites by shared link:', error);
@@ -77,7 +77,7 @@ export const getFavoritesBySharedLink = async (uuid) => {
 
 export const getSharedFavorites = async (id) => {
     try {
-        const response = await axios.get(`${BASE_URL}/shared/${id}`);
+        const response = await axios.get(`${BASE_URL}/api/shared/${id}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching shared favorites:', error);
@@ -87,7 +87,7 @@ export const getSharedFavorites = async (id) => {
 
 export const getMovie = async (id) => {
     try {
-        const response = await axios.get(`${BASE_URL}/movies/${id}`);
+        const response = await axios.get(`${BASE_URL}/api/movies/${id}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching movie:', error);

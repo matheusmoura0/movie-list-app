@@ -1,20 +1,7 @@
 {
-  "name": "movie-list-app",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "dotenv": "^16.4.5"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd backend && cd src && node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/matheusmoura0/movie-list-app.git"
-  },
+  "main": "src/app.js",
   "dependencies": {
     "axios": "^0.21.1",
     "cors": "^2.8.5",
@@ -23,11 +10,14 @@
     "sequelize": "^6.3.5",
     "sqlite3": "^5.0.0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/matheusmoura0/movie-list-app/issues"
+  "scripts": {
+    "start": "cd backend && node src/app.js",
+    "test": "NODE_ENV=test jest",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
-  "homepage": "https://github.com/matheusmoura0/movie-list-app#readme"
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "sequelize-mock": "^0.10.2",
+    "supertest": "^7.0.0"
+  }
 }

@@ -47,7 +47,7 @@ const MovieCard = ({ movie, onAddFavorite, onRemoveFavorite, isFavorite, isShare
                 )}
                 {showExpandButton && (
                     <button className="expand-button" onClick={handleToggleExpand}>
-                        {isExpanded ? 'Leia menos' : 'Leia mais'}
+                        {isExpanded ? 'Show more' : 'Show less'}
                     </button>
                 )}
             </div>

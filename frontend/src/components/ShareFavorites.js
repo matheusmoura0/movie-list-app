@@ -11,7 +11,7 @@ const ShareFavorites = ({ favoriteIds }) => {
             const sharedLink = await createSharedLink(favoriteIds);
             if (sharedLink) {
                 setShareLink(`${window.location.origin}${sharedLink}`);
-                setCopied(false); // Reset the copied state if a new link is generated
+                setCopied(false);
             } else {
                 console.error('Shared link is undefined');
             }

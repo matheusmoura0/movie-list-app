@@ -71,11 +71,14 @@ docker-compose up
 
 Crie um arquivo `.env` na pasta `backend` com as seguintes variáveis de ambiente:
 
-```bash
-PORT
-TMDB_API_KEY
-```
+```env
+# Porta onde a aplicação será executada
+PORT=3000
 
+# Chave da API do The Movie Database (TMDb)
+# Substitua 'your_api_key_here' pela sua chave real da API TMDb
+TMDB_API_KEY=your_api_key_here
+```
 
 ## Documentação da API
 
